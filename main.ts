@@ -1,3 +1,10 @@
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    tjento.sayText("")
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    tjento.sayText("jai kermer pransese")
+})
+let tjento: Sprite = null
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999111111111119999999999999999999999999999999999999991111999999999999999999999999999999999999999999111111111111
@@ -157,7 +164,7 @@ let bil = sprites.create(img`
     . . . f f f . . . . f f f f . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Enemy)
-let tjento = sprites.create(img`
+tjento = sprites.create(img`
     . . . . . . f f f f . . . . . . 
     . . . . f f e e e e f f . . . . 
     . . . f e e e f f e e e f . . . 
@@ -181,12 +188,14 @@ bil.setVelocity(50, 0)
 controller.moveSprite(tjento)
 forever(function () {
     if (bil.overlapsWith(tjento)) {
-        music.wawawawaa.playUntilDone()
         tjento.setPosition(80, 113)
+        music.wawawawaa.playUntilDone()
     }
     if (ela.overlapsWith(tjento)) {
+        effects.confetti.startScreenEffect()
         music.beamUp.playUntilDone()
         tjento.setPosition(80, 113)
+        effects.confetti.endScreenEffect()
     }
     if (bil.x > 200) {
         bil.setPosition(0, 61)
